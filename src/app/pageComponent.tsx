@@ -7,13 +7,12 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 
 export default function PageComponent() {
-  const contractAddress = "0x7A39eD022C332e305AaD99aE5340E9253715cD4d";
-
-  const [challengeBlockChainAddress, setChallengeBlockChainAddress] =
-    useState("");
+  const contractAddress = "0x69c687A5825A209c18e97af0E3FB6E8CC0afB543";
+  const blockchainAddress =
+    "0xd18324e1ba398ac1842fe2f0d28507bdc770bfa488468e101966829c5621f27d";
   const [challenge, setChallenge] = useState({});
 
-  const getOnChainChallenge = async (blockchainAddress: string) => {
+  const getOnChainChallenge = async () => {
     let getOnChainChallengeResponse; // Onchain Challenge Object
 
     // We get the onchain challenge object from the contract
@@ -22,9 +21,7 @@ export default function PageComponent() {
         abi: LudexProtocol.abi,
         address: contractAddress,
         functionName: "getChallenge",
-        args: [
-          "0x12a4e735fed9cbeb1e83c96626149d6185d0b8c66f2d37594d558d8b1fd2932c",
-        ],
+        args: [blockchainAddress],
       });
       if (result) {
         getOnChainChallengeResponse = result;
@@ -99,9 +96,9 @@ export default function PageComponent() {
         functionName: "joinChallenge",
         value: BigInt(1),
         args: [
-          //   "0x12a4e735fed9cbeb1e83c96626149d6185d0b8c66f2d37594d558d8b1fd2932c",
+          //   blockchainAddress,
           12345,
-          "0x0000000084f3085d5f9b7604310a9803ffa5eeaa9252b60f8c3c3209ed53d4cb591e2c30",
+          "0x310fe598182e43940b4d7f502f1b468069e85358a0b0a48a9ea06fb6fc690e99363680e62098f36aabfcaf7f5fb49d90f8388046cb2f620b4fda49ca8189572a8c4ab65129efe71916934700d19dcac5bc04a7c1f646f43e01701a15a6190cdb7f6952800adfb9103452744578b60ac9b1d2087031c04a76942b21f13312d8c0f2c49eda13073799eca77cb9d909e2e111095152aac1be67d7a1be2d4271d882764b89cd0bbc1a928baa29f42ff72980ca2ba403419efe7a62455e341d050449cf2162e02e0f96051a0f64560df1dd93a4d2763ff6d028ce74c5f29c05cb4e6f8bc88cdc00175a62de9a957f914fe2135c93704aa42896f0abeea3046b5f5c302b7a8aaa",
         ],
         account,
         gas: BigInt(300000),
@@ -118,7 +115,7 @@ export default function PageComponent() {
   return (
     <div className={`row-start-2 col-start-1 col-end-8 bg-white`}>
       <button
-        onClick={() => getOnChainChallenge("")}
+        onClick={() => getOnChainChallenge()}
         className={`bg-[#7b3fe4] text-white rounded-lg p-2 m-2`}
       >
         Get Onchain Challenge

@@ -8,7 +8,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MegaWeapon - Ludex",
+  title: "Ludex-ZK",
   description: "Onchain Gaming",
 };
 
